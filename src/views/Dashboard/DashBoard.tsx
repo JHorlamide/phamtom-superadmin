@@ -1,7 +1,6 @@
 import SidebarWithHeader from "../../components/Layout/SidebarWithHeader/SidebarWithHeader"
 import {
   Box,
-  chakra,
   Flex,
   SimpleGrid,
   Stat,
