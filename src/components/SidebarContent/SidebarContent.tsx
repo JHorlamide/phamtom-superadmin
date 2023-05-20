@@ -6,7 +6,6 @@ import {
   Text,
   BoxProps,
 } from '@chakra-ui/react';
-import { Link } from "react-router-dom";
 import NavItem from '../NavItem/NavItem';
 import navigationConfig from '../../config/NavigationConfig';
 
