@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import {
   Box,
   useColorModeValue,
@@ -5,7 +6,6 @@ import {
   DrawerContent,
   useDisclosure,
 } from '@chakra-ui/react';
-import { ReactNode } from 'react';
 import SidebarContent from '../../SidebarContent/SidebarContent';
 import MobileNav from '../../MobileNav/MobileNav';
 

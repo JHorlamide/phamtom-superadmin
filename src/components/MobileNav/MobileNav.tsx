@@ -13,12 +13,14 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  Image
 } from '@chakra-ui/react';
 import {
   FiMenu,
   FiBell,
   FiChevronDown,
 } from 'react-icons/fi';
+import PhamtomLogo from "../../assets/logo.svg"
 
 interface MobileProps extends FlexProps {
   onOpen: () => void;
@@ -49,7 +51,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         fontSize="2xl"
         fontFamily="monospace"
         fontWeight="bold">
-        Logo
+        <Image src={PhamtomLogo} />
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>
@@ -77,7 +79,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   alignItems="flex-start"
                   spacing="1px"
                   ml="2">
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontSize="sm">Phamtom Health</Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>

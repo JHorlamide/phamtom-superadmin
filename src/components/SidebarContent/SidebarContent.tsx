@@ -5,9 +5,12 @@ import {
   useColorModeValue,
   Text,
   BoxProps,
+  Image
 } from '@chakra-ui/react';
 import NavItem from '../NavItem/NavItem';
 import navigationConfig from '../../config/NavigationConfig';
+import PhamtomLogo from "../../assets/logo.svg"
+
 
 interface SidebarProps extends BoxProps {
   onClose: () => void;
@@ -26,7 +29,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       {...rest}>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
+          <Image src={PhamtomLogo} />
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
