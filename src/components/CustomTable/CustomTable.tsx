@@ -1,10 +1,10 @@
 import { ChakraProps, Flex, Heading, Input, Table, Tbody, Td, Text, Th, Thead, Tr, VStack } from "@chakra-ui/react";
 import { Fragment } from "react";
-import { Column, useTable } from "react-table";
+import { useTable } from "react-table";
 
 interface TableProps {
   tableHeading: string;
-  columns: Column<any>[];
+  columns: any[];
   data: any[];
   tableProps?: ChakraProps;
 }
