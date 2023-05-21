@@ -97,14 +97,6 @@ const Pharmacist = () => {
     }
   ];
 
-  if (isLoading) {
-    return <AppLoader />;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   const approveAccount = async (adminId: string) => {
     try {
       const response = await apiClient.post(`/online-pharmacy/super-admin/${adminId}/approve`);
@@ -121,6 +113,8 @@ const Pharmacist = () => {
 
   return (
     <SidebarWithHeader>
+      {isLoading && <AppLoader />}
+      {error && <div>{error}</div>}
       <CustomTable tableHeading="Registered Pharmacists" columns={tableColumns} data={data} />
     </SidebarWithHeader>
   )

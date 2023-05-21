@@ -2,12 +2,12 @@ import { ChakraProps, Flex, Heading, Input, Table, Tbody, Td, Text, Th, Thead, T
 import { Fragment } from "react";
 import { Column, useTable } from "react-table";
 
-type TableProps = {
+interface TableProps {
   tableHeading: string;
   columns: Column<any>[];
   data: any[];
   tableProps?: ChakraProps;
-};
+}
 
 const CustomTable = (props: TableProps) => {
   const { columns, data, tableProps, tableHeading } = props;
