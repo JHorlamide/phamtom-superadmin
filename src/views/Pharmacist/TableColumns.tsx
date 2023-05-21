@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
-import { Badge, Button } from '@chakra-ui/react'
+import { Badge } from '@chakra-ui/react'
 import { Column } from "react-table";
+import Button from '../../components/CustomBtn/Button';
 
 interface IPharmacyData {
   name_of_pharmacy: string;
@@ -35,6 +36,7 @@ export const tableColumns: Column<IPharmacyData>[] = [
         <Badge
           padding={2}
           borderRadius="full"
+          width="full"
           colorScheme={accountStatus(value)}
         >
           {value}
@@ -50,19 +52,29 @@ export const tableColumns: Column<IPharmacyData>[] = [
         <Fragment>
           {value ?
             <Button
-              paddingX={3}
-              padding={2} borderRadius="full"
-              bg="red.800"
+              paddingX={10}
+              padding={2}
+              width="full"
+              borderRadius="full"
+              bg="red.500"
               color="white"
+              _hover={{
+                bg: "red.500"
+              }}
             >
               Disable
             </Button>
             :
             <Button
-              paddingX={3}
-              padding={2} borderRadius="full"
+              paddingX={10}
+              padding={2}
+              width="full"
+              borderRadius="full"
               bg="blue.500"
               color="white"
+              _hover={{
+                bg: "blue.500"
+              }}
             >
               Approve
             </Button>

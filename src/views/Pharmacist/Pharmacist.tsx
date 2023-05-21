@@ -8,11 +8,11 @@ const Pharmacist = () => {
   const { data, error, isLoading } = useFetchPharmacists();
 
   if (isLoading) {
-    return <AppLoader />
+    return <AppLoader />;
   }
 
   if (error) {
-    return <div>{error}</div>
+    return <div>{error}</div>;
   }
 
   return (
