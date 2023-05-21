@@ -19,10 +19,10 @@ const useDataFetch = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, d
   const fetchData = async () => {
     try {
       const response = await apiClient.get<FetchResponse<T>>(endpoint, { signal, ...requestConfig })
-      if(response.data.status === "Success") {
+
+      if (response.data.status === "Success") {
         setLoading(false);
         setData(response.data.data);
-        console.log(response.data.status);
       }
     } catch (error: any) {
       setLoading(false);
@@ -36,8 +36,6 @@ const useDataFetch = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, d
     fetchData();
     return () => controller.abort();
   }, deps ? [...deps] : []);
-
-  console.log({ data })
 
   return { data, error, isLoading, }
 }
