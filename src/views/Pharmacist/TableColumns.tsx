@@ -53,6 +53,7 @@ export const tableColumns: Column<IPharmacyData>[] = [
               paddingX={3}
               padding={2} borderRadius="full"
               bg="red.800"
+              color="white"
             >
               Disable
             </Button>
@@ -61,6 +62,7 @@ export const tableColumns: Column<IPharmacyData>[] = [
               paddingX={3}
               padding={2} borderRadius="full"
               bg="blue.500"
+              color="white"
             >
               Approve
             </Button>
