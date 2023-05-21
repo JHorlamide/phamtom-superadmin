@@ -9,7 +9,7 @@ type TableProps = {
   tableProps?: ChakraProps;
 };
 
-const CustomTable: React.FC<TableProps> = (props: TableProps) => {
+const CustomTable = (props: TableProps) => {
   const { columns, data, tableProps, tableHeading } = props;
   const {
     getTableProps,
