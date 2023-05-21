@@ -11,7 +11,7 @@ interface IRoute {
 export const publicRoute: IRoute[] = [
   {
     key: "dashboard",
-    path: `${APP_PREFIX_PATH}/dashboard`,
+    path: `/`,
     component: React.lazy(() => import("../views/Dashboard/DashBoard"))
   },
 
