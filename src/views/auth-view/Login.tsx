@@ -37,7 +37,7 @@ export default function SimpleCard() {
     >
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
-          <Heading fontSize={'4xl'}>Sign in to admin accout</Heading>
+          <Heading fontSize={'4xl'}>Sign in to admin account</Heading>
         </Stack>
 
         <form onSubmit={handleSubmit(onSubmit)}>
