@@ -2,7 +2,7 @@ import { toast } from "react-hot-toast";
 import Utils from "../utils";
 import { AUTH_TOKEN, REFRESH_TOKEN } from "../constants/AuthConstant";
 import { setRefreshToken, setToken, setUser } from "../store/slices/authSlice";
-import { APP_PREFIX_PATH, AUTHENTICATED_ENTRY } from "../config/AppConfig";
+import { AUTHENTICATED_ENTRY } from "../config/AppConfig";
 import { LoginFormData, loginSchema } from "../schemas/login.schema";
 import { useAppDispatch } from "../store/store";
 import { zodResolver } from "@hookform/resolvers/zod";
