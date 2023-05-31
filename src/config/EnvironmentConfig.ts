@@ -1,13 +1,13 @@
 const dev = {
-  API_ENDPOINT_URL: 'http://localhost:9090/api/v2'
+  API_ENDPOINT_URL: 'https://dev-api-phamtom.herokuapp.com/api/v2'
 }
 
 const prod = {
-  API_ENDPOINT_URL: 'http://localhost:9090/api/v2'
+  API_ENDPOINT_URL: 'https://dev-api-phamtom.herokuapp.com/api/v2'
 };
 
 const test = {
-  API_ENDPOINT_URL: 'http://localhost:9090/api/v2'
+  API_ENDPOINT_URL: 'https://dev-api-phamtom.herokuapp.com/api/v2'
 };
 
 const getEnv = () => {
