@@ -21,13 +21,15 @@ import {
   FiChevronDown,
 } from 'react-icons/fi';
 import PhamtomLogo from "../../assets/logo.svg"
-import { useAppSelector } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { logoutUser } from '../../store/slices/authSlice';
 
 interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const dispatch = useAppDispatch()
   const { name, permission_flag } = useAppSelector((state) => state.auth.super_admin)
 
   return (
@@ -101,7 +103,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem onClick={() => dispatch(logoutUser())}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
