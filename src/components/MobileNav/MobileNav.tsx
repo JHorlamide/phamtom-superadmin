@@ -21,12 +21,15 @@ import {
   FiChevronDown,
 } from 'react-icons/fi';
 import PhamtomLogo from "../../assets/logo.svg"
+import { useAppSelector } from '../../store/store';
 
 interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const { name, permission_flag } = useAppSelector((state) => state.auth.super_admin)
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -80,9 +83,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   alignItems="flex-start"
                   spacing="1px"
                   ml="2">
-                  <Text fontSize="sm">Phamtom Health</Text>
+                  <Text fontSize="sm">{name}</Text>
                   <Text fontSize="xs" color="gray.600">
-                    Admin
+                    {permission_flag}
                   </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
