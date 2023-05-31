@@ -1,14 +1,10 @@
-import { Suspense } from "react";
 import { BrowserRouter } from "react-router-dom";
-import AppRouter from './routes';
-import AppLoader from "./components/AppLoader/AppLoader";
+import Layout from "./components/Layout/Layout";
 
 function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<AppLoader />}>
-        <AppRouter />
-      </Suspense>
+      <Layout />
     </BrowserRouter>
   )
 }

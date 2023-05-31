@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import {
   Box,
   useColorModeValue,
@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 import SidebarContent from '../../SidebarContent/SidebarContent';
 import MobileNav from '../../MobileNav/MobileNav';
+import AppLoader from '../../AppLoader/AppLoader';
 
 interface Props {
   children: ReactNode;
@@ -37,11 +38,13 @@ const SidebarWithHeader = ({ children }: Props) => {
       </Drawer>
 
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
-        {children}
-      </Box>
+      <Suspense fallback={<AppLoader />}>
+        <Box ml={{ base: 0, md: 60 }} p="4">
+          {children}
+        </Box>
+      </Suspense>
     </Box>
   );
 }
 
-export default SidebarWithHeader
+export default SidebarWithHeader;

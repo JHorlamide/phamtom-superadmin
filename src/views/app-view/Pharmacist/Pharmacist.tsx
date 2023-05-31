@@ -1,13 +1,13 @@
-import SidebarWithHeader from '../../components/Layout/SidebarWithHeader/SidebarWithHeader';
-import CustomTable from '../../components/CustomTable/CustomTable';
-import useFetchPharmacists from '../../hooks/useFetchPharmacists';
-import AppLoader from '../../components/AppLoader/AppLoader';
+import SidebarWithHeader from '../../../components/Layout/SidebarWithHeader/SidebarWithHeader';
+import CustomTable from '../../../components/CustomTable/CustomTable';
+// import useFetchPharmacists from '../../../hooks/useFetchPharmacists';
+import AppLoader from '../../../components/AppLoader/AppLoader';
 import { Fragment } from 'react';
 import { Badge } from '@chakra-ui/react'
 import { Column } from "react-table";
-import Button from '../../components/CustomBtn/Button';
-import apiClient from '../../service/apiClient';
+import Button from '../../../components/CustomBtn/Button';
 import { toast } from 'react-hot-toast';
+import { useApprovePharmacyMutation, useGetAllPharmaciesQuery } from '../../../services/super-admin/superAdmin';
 
 interface IPharmacyData {
   admin_id: string;
@@ -31,7 +31,12 @@ const accountStatus = (status: string) => {
 }
 
 const Pharmacist = () => {
-  const { data, error, isLoading } = useFetchPharmacists();
+  const { data, isLoading, isError: error } = useGetAllPharmaciesQuery();
+  const [approvePharmacy, { isLoading: isLoadingApprove }] = useApprovePharmacyMutation();
+
+  if (data && data?.data) {
+    console.log({ RES: data?.data });
+  }
 
   const tableColumns: Column<IPharmacyData>[] = [
     { Header: "Pharmacy Name", accessor: "name_of_pharmacy" },
@@ -47,6 +52,7 @@ const Pharmacist = () => {
             padding={2}
             borderRadius="full"
             width="full"
+            textAlign="center"
             colorScheme={accountStatus(value)}
           >
             {value}
@@ -65,6 +71,7 @@ const Pharmacist = () => {
                 paddingX={10}
                 padding={2}
                 width="full"
+                isLoading={isLoadingApprove}
                 borderRadius="full"
                 bg="red.500"
                 color="white"
@@ -99,7 +106,7 @@ const Pharmacist = () => {
 
   const approveAccount = async (adminId: string) => {
     try {
-      const response = await apiClient.post(`/online-pharmacy/super-admin/${adminId}/approve`);
+      const response = await approvePharmacy({ adminId }).unwrap();
       const { data } = response;
 
       if (data.status === "Success") {
@@ -111,11 +118,15 @@ const Pharmacist = () => {
     }
   }
 
+  if (!data) {
+    return null
+  }
+
   return (
     <SidebarWithHeader>
       {isLoading && <AppLoader />}
       {error && <div>{error}</div>}
-      <CustomTable tableHeading="Registered Pharmacists" columns={tableColumns} data={data} />
+      <CustomTable tableHeading="Registered Pharmacists" columns={tableColumns} data={data.data} />
     </SidebarWithHeader>
   )
 }

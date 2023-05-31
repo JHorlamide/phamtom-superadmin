@@ -3,7 +3,7 @@ import { RiAdminLine } from "react-icons/ri";
 import { MdOutlineLocalPharmacy } from "react-icons/md";
 import { IconType } from 'react-icons';
 import { FaUsers } from "react-icons/fa";
-import { APP_PREFIX_PATH } from "./AppConfig";
+import { APP_PREFIX_PATH, AUTHENTICATED_ENTRY } from "./AppConfig";
 
 interface LinkItemProps {
   key: string;
@@ -15,7 +15,7 @@ interface LinkItemProps {
 const navigationConfig: Array<LinkItemProps> = [
   {
     key: 'dashboard',
-    path: `${APP_PREFIX_PATH}/dashboard`,
+    path: `${AUTHENTICATED_ENTRY}`,
     name: 'Dashboard',
     Icon: FiHome,
   },

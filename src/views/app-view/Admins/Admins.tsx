@@ -1,8 +1,9 @@
-import SidebarWithHeader from "../../components/Layout/SidebarWithHeader/SidebarWithHeader"
+import SidebarWithHeader from "../../../components/Layout/SidebarWithHeader/SidebarWithHeader"
 import { Column } from "react-table";
-import CustomTable from '../../components/CustomTable/CustomTable';
-import useFetchAdmin from "../../hooks/useFetchAdmin";
-import AppLoader from "../../components/AppLoader/AppLoader";
+import CustomTable from '../../../components/CustomTable/CustomTable';
+// import useFetchAdmin from "../../../hooks/useFetchAdmin";
+import AppLoader from "../../../components/AppLoader/AppLoader";
+import { useGetAllAdminsQuery } from "../../../services/super-admin/superAdmin";
 
 interface IAdminData {
   email: string;
@@ -20,7 +21,8 @@ const tableColumns: Column<IAdminData>[] = [
 ];
 
 const Admins = () => {
-  const { data, isLoading, error } = useFetchAdmin();
+  const { data, isLoading, isError: error } = useGetAllAdminsQuery()
+  // const { data, isLoading, error } = useFetchAdmin();
 
   if (isLoading) {
     return <AppLoader />
@@ -32,7 +34,7 @@ const Admins = () => {
 
   return (
     <SidebarWithHeader>
-      <CustomTable tableHeading="Register Admins" columns={tableColumns} data={data} />
+      <CustomTable tableHeading="Register Admins" columns={tableColumns} data={data?.data} />
     </SidebarWithHeader>
   )
 }

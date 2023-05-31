@@ -1,4 +1,4 @@
-import SidebarWithHeader from "../../components/Layout/SidebarWithHeader/SidebarWithHeader"
+import SidebarWithHeader from "../../../components/Layout/SidebarWithHeader/SidebarWithHeader"
 import {
   Box,
   Flex,
@@ -21,6 +21,7 @@ interface StatsCardProps {
 
 function StatsCard(props: StatsCardProps) {
   const { title, stat, icon } = props;
+
   return (
     <Stat
       px={{ base: 2, md: 4 }}
@@ -34,10 +35,12 @@ function StatsCard(props: StatsCardProps) {
           <StatLabel fontWeight={'medium'} isTruncated>
             {title}
           </StatLabel>
+
           <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
             {stat}
           </StatNumber>
         </Box>
+
         <Box
           my={'auto'}
           color={useColorModeValue('gray.800', 'gray.200')}
@@ -59,11 +62,13 @@ const DashBoard = () => {
             stat={'5,000'}
             icon={<BsPerson size={'3em'} />}
           />
+
           <StatsCard
             title={'Registered Admins'}
             stat={'1,000'}
             icon={<FiServer size={'3em'} />}
           />
+
           <StatsCard
             title={'Approved Pharmacists'}
             stat={'7'}

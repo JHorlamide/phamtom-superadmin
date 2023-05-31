@@ -27,7 +27,6 @@ const NavItem = ({ icon, path, name, }: NavItemProps) => {
     return null;
   };
 
-
   return (
     <Link to={path} style={{ textDecoration: 'none' }}>
       <Flex
@@ -37,14 +36,17 @@ const NavItem = ({ icon, path, name, }: NavItemProps) => {
         borderRadius="lg"
         role="group"
         cursor="pointer"
-        {...selectedNavItemStyle(path)}
-      >
-        <Icon mr="4" fontSize="16" _groupHover={{ color: 'white' }} as={icon} />
+        {...selectedNavItemStyle(path)}>
+        <Icon
+          color="blue.500"
+          mr="4"
+          fontSize="16"
+          _groupHover={{ color: "blue.500" }}
+          as={icon} />
         {name}
       </Flex>
     </Link>
   );
 };
-
 
 export default NavItem

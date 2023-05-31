@@ -1,8 +1,9 @@
-import SidebarWithHeader from '../../components/Layout/SidebarWithHeader/SidebarWithHeader';
+import SidebarWithHeader from '../../../components/Layout/SidebarWithHeader/SidebarWithHeader';
 import { Column } from "react-table";
-import CustomTable from '../../components/CustomTable/CustomTable';
-import useFetchUsers from '../../hooks/useFetchUsers';
-import AppLoader from '../../components/AppLoader/AppLoader';
+import CustomTable from '../../../components/CustomTable/CustomTable';
+// import useFetchUsers from '../../../hooks/useFetchUsers';
+import AppLoader from '../../../components/AppLoader/AppLoader';
+import { useGetAllUsersQuery } from '../../../services/super-admin/superAdmin';
 
 interface IUserData {
   email: string;
@@ -19,7 +20,8 @@ const tableColumns: Column<IUserData>[] = [
 ];
 
 const Users = () => {
-  const { data, isLoading, error } = useFetchUsers();
+  const { data, isLoading, isError: error } = useGetAllUsersQuery();
+  // const { data, isLoading, error } = useFetchUsers();
 
   if (isLoading) {
     return <AppLoader />
@@ -31,7 +33,7 @@ const Users = () => {
 
   return (
     <SidebarWithHeader>
-      <CustomTable tableHeading="Registered Users" columns={tableColumns} data={data} />
+      <CustomTable tableHeading="Registered Users" columns={tableColumns} data={data?.data} />
     </SidebarWithHeader>
   )
 }

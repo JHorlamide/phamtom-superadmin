@@ -17,6 +17,8 @@ const useDataFetch = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, d
   const { signal } = controller;
 
   const fetchData = async () => {
+    setLoading(true);
+    
     try {
       const response = await apiClient.get<FetchResponse<T>>(endpoint, { signal, ...requestConfig })
 
@@ -32,7 +34,6 @@ const useDataFetch = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, d
   }
 
   useEffect(() => {
-    setLoading(true);
     fetchData();
     return () => controller.abort();
   }, deps ? [...deps] : []);
