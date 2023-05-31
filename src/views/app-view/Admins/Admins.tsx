@@ -1,7 +1,6 @@
 import SidebarWithHeader from "../../../components/Layout/SidebarWithHeader/SidebarWithHeader"
 import { Column } from "react-table";
 import CustomTable from '../../../components/CustomTable/CustomTable';
-// import useFetchAdmin from "../../../hooks/useFetchAdmin";
 import AppLoader from "../../../components/AppLoader/AppLoader";
 import { useGetAllAdminsQuery } from "../../../services/super-admin/superAdmin";
 
@@ -12,7 +11,6 @@ interface IAdminData {
   phone_number: string;
 }
 
-// Example columns
 const tableColumns: Column<IAdminData>[] = [
   { Header: "Name Of Institution", accessor: "name_of_institution" },
   { Header: "Address", accessor: "address" },

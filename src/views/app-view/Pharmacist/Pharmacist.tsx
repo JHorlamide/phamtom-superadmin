@@ -1,6 +1,5 @@
 import SidebarWithHeader from '../../../components/Layout/SidebarWithHeader/SidebarWithHeader';
 import CustomTable from '../../../components/CustomTable/CustomTable';
-// import useFetchPharmacists from '../../../hooks/useFetchPharmacists';
 import AppLoader from '../../../components/AppLoader/AppLoader';
 import { Fragment } from 'react';
 import { Badge } from '@chakra-ui/react'
@@ -119,14 +118,16 @@ const Pharmacist = () => {
   }
 
   if (!data) {
-    return null
+    return <p>No data available. Please try again</p>;
   }
 
   return (
     <SidebarWithHeader>
       {isLoading && <AppLoader />}
       {error && <div>{error}</div>}
-      <CustomTable tableHeading="Registered Pharmacists" columns={tableColumns} data={data.data} />
+      <CustomTable
+        tableHeading="Registered Pharmacists"
+        columns={tableColumns} data={data.data} />
     </SidebarWithHeader>
   )
 }
