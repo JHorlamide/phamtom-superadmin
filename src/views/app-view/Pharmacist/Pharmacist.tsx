@@ -6,7 +6,14 @@ import { Badge } from '@chakra-ui/react'
 import { Column } from "react-table";
 import Button from '../../../components/CustomBtn/Button';
 import { toast } from 'react-hot-toast';
-import { useApprovePharmacyMutation, useGetAllPharmaciesQuery, useSuspendPharmacyMutation } from '../../../services/super-admin/superAdmin';
+import {
+  useApprovePharmacyMutation,
+  useGetAllPharmaciesQuery,
+  useSuspendPharmacyMutation
+} from '../../../services/super-admin/superAdmin';
+import useNavigation from '../../../hooks/useNavigation';
+import { APP_PREFIX_PATH } from '../../../config/AppConfig';
+import Utils from '../../../utils';
 
 interface IPharmacyData {
   admin_id: string;
@@ -18,18 +25,8 @@ interface IPharmacyData {
   is_verified: boolean
 }
 
-const accountStatus = (status: string) => {
-  switch (status) {
-    case "APPROVED":
-      return "green"
-    case "PENDING":
-      return "blue"
-    default:
-      return "red"
-  }
-}
-
 const Pharmacist = () => {
+  const { handleNavigate } = useNavigation();
   const { data, isLoading, isError: error } = useGetAllPharmaciesQuery();
   const [approvePharmacy, { isLoading: isLoadingApprove }] = useApprovePharmacyMutation();
   const [suspendPharmacy, { isLoading: isLoadingSuspend }] = useSuspendPharmacyMutation();
@@ -49,7 +46,7 @@ const Pharmacist = () => {
             borderRadius="full"
             width="full"
             textAlign="center"
-            colorScheme={accountStatus(value)}
+            colorScheme={Utils.getAccountStatus(value)}
           >
             {value}
           </Badge>
@@ -129,6 +126,12 @@ const Pharmacist = () => {
     }
   }
 
+  const handleRowClick = (rowData: any) => {
+    console.log({ rowData });
+    const { _id } = rowData;
+    handleNavigate(`${APP_PREFIX_PATH}/pharmacist/${_id}`);
+  };
+
   if (!data?.data) {
     return <AppLoader />;
   }
@@ -139,7 +142,9 @@ const Pharmacist = () => {
       {error && <div>{error}</div>}
       <CustomTable
         tableHeading="Registered Pharmacists"
-        columns={tableColumns} data={data.data} />
+        columns={tableColumns} data={data.data}
+        onRowClick={(rowData) => handleRowClick(rowData)}
+      />
     </SidebarWithHeader>
   )
 }

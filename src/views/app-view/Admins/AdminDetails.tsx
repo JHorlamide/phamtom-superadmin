@@ -16,42 +16,13 @@ import {
 import { useParams } from 'react-router-dom';
 import { useGetPharmaciesDetailsQuery } from '../../../services/super-admin/superAdmin';
 import AppLoader from '../../../components/AppLoader/AppLoader';
-import DocumentViewer from "./DocumentViewer";
 import Utils from '../../../utils';
 import SidebarWithHeader from '../../../components/Layout/SidebarWithHeader/SidebarWithHeader';
 
-interface LogisticItemProps {
-  name: string;
-  imageUrl: string;
-}
 
-const LogisticItem = (props: LogisticItemProps) => {
-  const { name, imageUrl } = props;
-
-  return (
-    <HStack
-      spacing={5}
-      width="full"
-      paddingY={2}
-      paddingX={2}
-      borderWidth={1}
-      borderColor="blue.500"
-      borderRadius={16}
-    >
-      <Image
-        width={10}
-        height={10}
-        flexWrap="nowrap"
-        borderRadius={10} src={imageUrl}
-      />
-      <Text whiteSpace="nowrap">{name}</Text>
-    </HStack>
-  )
-}
-
-const PharmacistDetails = () => {
-  const { pharmacyId } = useParams();
-  const id = String(pharmacyId);
+const AdminDetails = () => {
+  const { adminId } = useParams();
+  const id = String(adminId);
   const { data, isLoading } = useGetPharmaciesDetailsQuery({ pharmacyId: id });
 
   if (isLoading) {
@@ -59,7 +30,7 @@ const PharmacistDetails = () => {
   }
 
   if (!data?.data) {
-    return <Text>Error fetching pharmacy details</Text>
+    return <Text>Error fetching admin details</Text>
   }
 
   const {
@@ -122,7 +93,6 @@ const PharmacistDetails = () => {
                     {account_status}
                   </Badge>
                 </Text>
-
               </HStack>
             </Box>
 
@@ -254,37 +224,7 @@ const PharmacistDetails = () => {
                 </List>
               </Box>
             </Stack>
-
-
-            <Stack width="full">
-              <Text
-                fontSize={{ base: '16px', lg: '18px' }}
-                color="blue.500"
-                fontWeight={'500'}
-                textTransform={'uppercase'}
-                mb={'4'}>
-                Logistics Services
-              </Text>
-
-              <SimpleGrid
-                columns={{ base: 1, lg: 2 }}
-                spacing={{ base: 8, md: 5 }}
-                width="full"
-              >
-                {logistics.map((logistic: any) => (
-                  <LogisticItem
-                    name={logistic.logistics_name}
-                    imageUrl={logistic.logistics_image && logistic.logistics_image.imageUrl}
-                  />
-                ))}
-              </SimpleGrid>
-            </Stack>
-
           </Stack>
-
-          <Flex height="full" width="full" marginY={10}>
-            <DocumentViewer pdfLink={valid_document.imageUrl} />
-          </Flex>
         </SimpleGrid>
       </Container>
     </SidebarWithHeader>
@@ -292,4 +232,4 @@ const PharmacistDetails = () => {
 }
 
 
-export default PharmacistDetails;
+export default AdminDetails;

@@ -7,6 +7,7 @@ interface TableProps {
   columns: any[];
   data: any[];
   tableProps?: ChakraProps;
+  onRowClick?: (rowData: any) => void;
 }
 
 const CustomTable = (props: TableProps) => {
@@ -49,7 +50,10 @@ const CustomTable = (props: TableProps) => {
             {rows.map((row) => {
               prepareRow(row);
               return (
-                <Tr {...row.getRowProps()}>
+                <Tr {...row.getRowProps()}
+                  onClick={() => props.onRowClick && props.onRowClick(row.original)}
+                  style={{ cursor: "pointer", borderBottom: "1px solid #ccc", }}
+                >
                   {row.cells.map((cell) => (
                     <Td {...cell.getCellProps()}>
                       <Text>{cell.render("Cell")}</Text>

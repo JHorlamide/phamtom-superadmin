@@ -6,6 +6,7 @@ import Admins from "../views/app-view/Admins/Admins";
 import Pharmacist from "../views/app-view/Pharmacist/Pharmacist";
 import PharmacistDetails from "../views/app-view/Pharmacist/PharmaciesDetail";
 import Login from "../views/auth-view/Login"
+import AdminDetails from "../views/app-view/Admins/AdminDetails";
 
 interface IRoute {
   [x: string]: any;
@@ -31,6 +32,12 @@ export const protectedRoute: IRoute[] = [
     key: "admins",
     path: `${APP_PREFIX_PATH}/admins`,
     component: Admins
+  },
+
+  {
+    key: "admins-details",
+    path: `${APP_PREFIX_PATH}/admins/:adminId`,
+    component: AdminDetails
   },
 
   {

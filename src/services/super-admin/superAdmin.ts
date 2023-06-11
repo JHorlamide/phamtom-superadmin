@@ -94,5 +94,6 @@ export const {
   useGetAllPharmaciesQuery,
   useApprovePharmacyMutation,
   useSuspendPharmacyMutation,
-  useGetStatsQuery
+  useGetStatsQuery,
+  useGetPharmaciesDetailsQuery
 } = superAdminApi;
