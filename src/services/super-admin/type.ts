@@ -72,7 +72,14 @@ export interface IGetAdminRes extends IBaseResponse {
 
 export interface IGetPharmacies extends IBaseResponse {
   data: any;
-  // data: IPharmacist[];
+}
+
+export interface IGetPharmacyDetailsReq {
+  pharmacyId: string;
+}
+
+export interface IGetPharmacyDetailsRes extends IBaseResponse {
+  data: any;
 }
 
 export interface ApprovePharmacyReq {
@@ -81,4 +88,16 @@ export interface ApprovePharmacyReq {
 
 export interface ApprovePharmacyRes extends IBaseResponse {
   data: any;
+}
+
+export interface GetStatsRes {
+  data: {
+    totalAdmins: number;
+    totalPatientRecord: number;
+    totalUsers: number;
+    totalPharmacy: {
+      totalPharmacy: number;
+      totalApprovedPharmacy: number;
+    },
+  }
 }

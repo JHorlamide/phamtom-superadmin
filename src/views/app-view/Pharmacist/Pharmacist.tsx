@@ -1,12 +1,12 @@
 import SidebarWithHeader from '../../../components/Layout/SidebarWithHeader/SidebarWithHeader';
 import CustomTable from '../../../components/CustomTable/CustomTable';
 import AppLoader from '../../../components/AppLoader/AppLoader';
-import { Fragment } from 'react';
+import { Fragment, useMemo } from 'react';
 import { Badge } from '@chakra-ui/react'
 import { Column } from "react-table";
 import Button from '../../../components/CustomBtn/Button';
 import { toast } from 'react-hot-toast';
-import { useApprovePharmacyMutation, useGetAllPharmaciesQuery } from '../../../services/super-admin/superAdmin';
+import { useApprovePharmacyMutation, useGetAllPharmaciesQuery, useSuspendPharmacyMutation } from '../../../services/super-admin/superAdmin';
 
 interface IPharmacyData {
   admin_id: string;
@@ -32,12 +32,9 @@ const accountStatus = (status: string) => {
 const Pharmacist = () => {
   const { data, isLoading, isError: error } = useGetAllPharmaciesQuery();
   const [approvePharmacy, { isLoading: isLoadingApprove }] = useApprovePharmacyMutation();
+  const [suspendPharmacy, { isLoading: isLoadingSuspend }] = useSuspendPharmacyMutation();
 
-  if (data && data?.data) {
-    console.log({ RES: data?.data });
-  }
-
-  const tableColumns: Column<IPharmacyData>[] = [
+  const tableColumns: Column<IPharmacyData>[] = useMemo(() => [
     { Header: "Pharmacy Name", accessor: "name_of_pharmacy" },
     { Header: "Superintendent Pharmacy", accessor: "name_of_superintendent_pharmacy" },
     { Header: "Email", accessor: "pharmacy_email" },
@@ -77,8 +74,9 @@ const Pharmacist = () => {
                 _hover={{
                   bg: "red.500"
                 }}
+                onClick={() => suspendAccount(original.admin_id)}
               >
-                Disable
+                Suspend
               </Button>
               :
               <Button
@@ -91,17 +89,17 @@ const Pharmacist = () => {
                 _hover={{
                   bg: "blue.500"
                 }}
+                isLoading={isLoadingSuspend}
                 onClick={() => approveAccount(original.admin_id)}
               >
                 Approve
               </Button>
             }
-
           </Fragment>
         )
       }
     }
-  ];
+  ], []);
 
   const approveAccount = async (adminId: string) => {
     try {
@@ -117,8 +115,22 @@ const Pharmacist = () => {
     }
   }
 
-  if (!data) {
-    return <p>No data available. Please try again</p>;
+  const suspendAccount = async (adminId: string) => {
+    try {
+      const response = await suspendPharmacy({ adminId }).unwrap();
+      const { data } = response;
+
+      if (data.status === "Success") {
+        toast.success("Pharmacy Approved");
+        return;
+      }
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  }
+
+  if (!data?.data) {
+    return <AppLoader />;
   }
 
   return (

@@ -1,36 +1,48 @@
 import React from "react";
 import { APP_PREFIX_PATH, AUTH_PREFIX_PATH } from "./AppConfig";
+import DashBoard from "../views/app-view/Dashboard/DashBoard";
+import Users from "../views/app-view/Users/Users";
+import Admins from "../views/app-view/Admins/Admins";
+import Pharmacist from "../views/app-view/Pharmacist/Pharmacist";
+import PharmacistDetails from "../views/app-view/Pharmacist/PharmaciesDetail";
+import Login from "../views/auth-view/Login"
 
 interface IRoute {
   [x: string]: any;
   key: string;
   path: string;
-  component: React.LazyExoticComponent<() => JSX.Element>
+  component: () => JSX.Element;
 }
 
 export const protectedRoute: IRoute[] = [
   {
     key: "dashboard",
     path: `/`,
-    component: React.lazy(() => import("../views/app-view/Dashboard/DashBoard"))
+    component: DashBoard
   },
 
   {
     key: "users",
     path: `${APP_PREFIX_PATH}/users`,
-    component: React.lazy(() => import("../views/app-view/Users/Users"))
+    component: Users
   },
 
   {
     key: "admins",
     path: `${APP_PREFIX_PATH}/admins`,
-    component: React.lazy(() => import("../views/app-view/Admins/Admins"))
+    component: Admins
   },
 
   {
     key: "pharmacist",
     path: `${APP_PREFIX_PATH}/pharmacist`,
-    component: React.lazy(() => import("../views/app-view/Pharmacist/Pharmacist"))
+    component: Pharmacist
+  },
+  
+  {
+    key: "pharmacist-details",
+    path: `${APP_PREFIX_PATH}/pharmacist/:pharmacyId`,
+    component: PharmacistDetails
   }
 ]
 
@@ -38,6 +50,6 @@ export const publicRoute: IRoute[] = [
   {
     key: "login",
     path: `${AUTH_PREFIX_PATH}/login`,
-    component: React.lazy(() => import("../views/auth-view/Login"))
+    component: Login
   },
 ]
