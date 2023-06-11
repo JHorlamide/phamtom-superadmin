@@ -71,7 +71,7 @@ const Pharmacist = () => {
                 _hover={{
                   bg: "red.500"
                 }}
-                onClick={() => suspendAccount(original.admin_id)}
+                onClick={(e) => suspendAccount(original.admin_id, e)}
               >
                 Suspend
               </Button>
@@ -87,7 +87,7 @@ const Pharmacist = () => {
                   bg: "blue.500"
                 }}
                 isLoading={isLoadingSuspend}
-                onClick={() => approveAccount(original.admin_id)}
+                onClick={(e) => approveAccount(original.admin_id, e)}
               >
                 Approve
               </Button>
@@ -98,7 +98,12 @@ const Pharmacist = () => {
     }
   ], []);
 
-  const approveAccount = async (adminId: string) => {
+  const approveAccount = async (
+    adminId: string,
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+
     try {
       const response = await approvePharmacy({ adminId }).unwrap();
       const { data } = response;
@@ -112,7 +117,12 @@ const Pharmacist = () => {
     }
   }
 
-  const suspendAccount = async (adminId: string) => {
+  const suspendAccount = async (
+    adminId: string,
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+
     try {
       const response = await suspendPharmacy({ adminId }).unwrap();
       const { data } = response;
@@ -127,7 +137,6 @@ const Pharmacist = () => {
   }
 
   const handleRowClick = (rowData: any) => {
-    console.log({ rowData });
     const { _id } = rowData;
     handleNavigate(`${APP_PREFIX_PATH}/pharmacist/${_id}`);
   };
@@ -143,7 +152,14 @@ const Pharmacist = () => {
       <CustomTable
         tableHeading="Registered Pharmacists"
         columns={tableColumns} data={data.data}
-        onRowClick={(rowData) => handleRowClick(rowData)}
+        // onRowClick={(rowData) => handleRowClick(rowData)}
+
+        onRowClick={(rowData, event) => {
+          const target = event.target as HTMLElement; // Type assertion to HTMLElement
+          if (!target.classList.contains("chakra-badge")) { // Check if the clicked element is not a badge
+            handleRowClick(rowData);
+          }
+        }}
       />
     </SidebarWithHeader>
   )

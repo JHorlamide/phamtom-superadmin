@@ -7,7 +7,7 @@ interface TableProps {
   columns: any[];
   data: any[];
   tableProps?: ChakraProps;
-  onRowClick?: (rowData: any) => void;
+  onRowClick?: (rowData: any, event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => void;
 }
 
 const CustomTable = (props: TableProps) => {
@@ -51,7 +51,7 @@ const CustomTable = (props: TableProps) => {
               prepareRow(row);
               return (
                 <Tr {...row.getRowProps()}
-                  onClick={() => props.onRowClick && props.onRowClick(row.original)}
+                  onClick={(e) => props.onRowClick && props.onRowClick(row.original, e)}
                   style={{ cursor: "pointer", borderBottom: "1px solid #ccc", }}
                 >
                   {row.cells.map((cell) => (

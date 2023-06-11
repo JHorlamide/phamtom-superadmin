@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_BASE_URL } from "../../config/AppConfig";
-import { IGetUsersRes, IGetAdminRes, IGetPharmacies, ApprovePharmacyReq, ApprovePharmacyRes, GetStatsRes, IGetPharmacyDetailsRes, IGetPharmacyDetailsReq } from "./type";
+import { IGetUsersRes, IGetAdminRes, IGetPharmacies, ApprovePharmacyReq, ApprovePharmacyRes, GetStatsRes, IGetPharmacyDetailsRes, IGetPharmacyDetailsReq, IGetAdminReq } from "./type";
 import { RootState } from "../../store/store";
 import { AUTH_TOKEN } from "../../constants/AuthConstant";
 
@@ -36,6 +36,14 @@ export const superAdminApi = createApi({
     getAllAdmins: builder.query<IGetAdminRes, void>({
       query: () => ({
         url: `/super-admin/admins`
+      }),
+
+      providesTags: ["Admins"]
+    }),
+
+    getAdminsDetails: builder.query<IGetAdminRes, IGetAdminReq>({
+      query: ({ adminId }) => ({
+        url: `/super-admin/admins/${adminId}`
       }),
 
       providesTags: ["Admins"]
@@ -95,5 +103,6 @@ export const {
   useApprovePharmacyMutation,
   useSuspendPharmacyMutation,
   useGetStatsQuery,
+  useGetAdminsDetailsQuery,
   useGetPharmaciesDetailsQuery
 } = superAdminApi;

@@ -65,9 +65,12 @@ export interface IGetUsersRes extends IBaseResponse {
   // data: IUser[];
 }
 
+export interface IGetAdminReq {
+  adminId: string;
+}
+
 export interface IGetAdminRes extends IBaseResponse {
   data: any;
-  // data: IAdmin[];
 }
 
 export interface IGetPharmacies extends IBaseResponse {

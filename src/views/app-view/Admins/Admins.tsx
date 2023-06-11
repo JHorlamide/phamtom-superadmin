@@ -23,7 +23,6 @@ const tableColumns: Column<IAdminData>[] = [
 const Admins = () => {
   const { handleNavigate } = useNavigation();
   const { data, isLoading, isError: error } = useGetAllAdminsQuery()
-  // const { data, isLoading, error } = useFetchAdmin();
 
   if (isLoading) {
     return <AppLoader />
@@ -34,9 +33,8 @@ const Admins = () => {
   }
 
   const handleRowClick = (rowData: any) => {
-    console.log({ rowData });
     const { _id } = rowData;
-    handleNavigate(`${APP_PREFIX_PATH}/admin/${_id}`);
+    handleNavigate(`${APP_PREFIX_PATH}/admins/${_id}`);
   };
 
   return (

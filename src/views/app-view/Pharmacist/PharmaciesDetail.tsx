@@ -140,7 +140,7 @@ const PharmacistDetails = () => {
                   Corresponding Admin
                 </Text>
 
-                <SimpleGrid columns={{ base: 1, md: 1 }}>
+                <SimpleGrid columns={{ base: 1, md: 1 }} spacing={1}>
                   <List spacing={2}>
                     <ListItem whiteSpace="nowrap">
                       <Text as={'span'} fontWeight={'bold'}>
