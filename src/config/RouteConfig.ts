@@ -1,4 +1,3 @@
-import React from "react";
 import { APP_PREFIX_PATH, AUTH_PREFIX_PATH } from "./AppConfig";
 import DashBoard from "../views/app-view/Dashboard/DashBoard";
 import Users from "../views/app-view/Users/Users";
