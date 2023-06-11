@@ -56,7 +56,7 @@ function StatsCard(props: StatsCardProps) {
 }
 
 const DashBoard = () => {
-  const { data, isLoading, isError } = useGetStatsQuery();
+  const { data, isLoading } = useGetStatsQuery();
 
   if (!data?.data) {
     return <AppLoader />
