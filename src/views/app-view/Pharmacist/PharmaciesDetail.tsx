@@ -85,6 +85,8 @@ const PharmacistDetails = () => {
     }
   } = data.data;
 
+  const documentUrl = valid_document && valid_document.imageUrl;
+
   return (
     <SidebarWithHeader>
       <Container maxW={'7xl'}>
@@ -283,7 +285,7 @@ const PharmacistDetails = () => {
           </Stack>
 
           <Flex height="full" width="full" marginY={10}>
-            <DocumentViewer pdfLink={valid_document.imageUrl} />
+            {documentUrl && <DocumentViewer pdfLink={documentUrl} />}
           </Flex>
         </SimpleGrid>
       </Container>
