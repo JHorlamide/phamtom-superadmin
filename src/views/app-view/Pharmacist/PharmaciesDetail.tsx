@@ -276,7 +276,7 @@ const PharmacistDetails = () => {
                 {logistics.map((logistic: any) => (
                   <LogisticItem
                     name={logistic.logistics_name}
-                    imageUrl={logistic.logistics_image && logistic.logistics_image.imageUrl}
+                    imageUrl={logistic.logistics_image && logistic.logistics_image?.imageUrl}
                   />
                 ))}
               </SimpleGrid>
