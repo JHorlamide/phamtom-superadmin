@@ -3,7 +3,8 @@ const dev = {
 }
 
 const prod = {
-  API_ENDPOINT_URL: 'https://dev-api-phamtom.herokuapp.com/api/v2'
+  API_ENDPOINT_URL: "https://api.phamtomhealth.com/api/v2"
+  // API_ENDPOINT_URL: 'https://dev-api-phamtom.herokuapp.com/api/v2'
 };
 
 const test = {
